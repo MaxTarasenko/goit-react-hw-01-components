@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import TransactionHistoryItem from './TransactionHistoryItem';
 
 function compare(a, b) {
   if (a.type > b.type) return 1;
@@ -16,15 +18,21 @@ const TransactionHistory = ({ transactions }) => (
     </thead>
 
     <tbody>
-      {transactions.sort(compare).map(({ id, type, amount, currency }) => (
-        <tr key={id} className="transaction-history__tr">
-          <td className="transaction-history__td">{type}</td>
-          <td className="transaction-history__td">{amount}</td>
-          <td className="transaction-history__td">{currency}</td>
+      {transactions.sort(compare).map(tableItem => (
+        <tr key={tableItem.id} className="transaction-history__tr">
+          <TransactionHistoryItem tableItem={tableItem} />
         </tr>
       ))}
     </tbody>
   </table>
 );
+
+TransactionHistory.propTypes = {
+  transactions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
 
 export default TransactionHistory;

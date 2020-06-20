@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Profile = ({ name, tag, location, avatar, followers, views, likes }) => (
   <div className="profile">
@@ -25,5 +26,15 @@ const Profile = ({ name, tag, location, avatar, followers, views, likes }) => (
     </ul>
   </div>
 );
+
+Profile.propTypes = {
+  avatar: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  followers: PropTypes.number.isRequired,
+  likes: PropTypes.number.isRequired,
+  views: PropTypes.number.isRequired,
+};
 
 export default Profile;
